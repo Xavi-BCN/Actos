@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala Barcelona</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Estilos de cabecera */
+        header {
+            background-color: #d32f2f; /* Rojo */
+            color: #fff;
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin-left: 1rem;
+        }
+
+        .language-switcher {
+            margin-right: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .language-switcher span {
+            cursor: pointer;
+            padding: 0.5rem;
+            background-color: #ffffff7d;
+            color: #de0909;
+            border-radius: 5px;
+            user-select: none;
+        }
+
+        .language-switcher span.active {
+            border-radius: 50px;
+            font-weight: bold;
+            background-color: #ffffff;
+        }
+
+        /* Estilos principales */
+        main {
+            padding: 1rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Colores de los títulos de sección */
+        #funcionamiento h2, #conexion-zoom h2, #conectar-portatil h2, #compartir-pantalla h2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #funcionamiento h2 {
+            color: #9c27b0; /* Violeta */
+        }
+
+        #conexion-zoom h2 {
+            color: #ff5722; /* Naranja */
+        }
+
+        #conectar-portatil h2 {
+            color: #d32f2f; /* Rojo */
+        }
+
+        #compartir-pantalla h2 {
+            color: #9c27b0; /* Violeta */
+        }
+
+        section ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            display: none; /* Inicialmente oculto */
+        }
+
+        section.expanded ul {
+            display: block;
+        }
+
+        /* Estilos de pie de página */
+        footer {
+            background-color: #d32f2f; /* Rojo */
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Estilos responsivos */
+        @media (min-width: 768px) {
+            main {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sala Barcelona</h1>
+        <div class="language-switcher">
+            <span id="esp" class="active">ESP</span>
+            <span id="cat">CAT</span>
+        </div>
+    </header>
+    <main>
+        <section id="funcionamiento">
+            <h2 data-esp="Conexión a PC de sala" data-cat="Connexió al PC de la sala">Conexión a PC de sala <span class="toggle-symbol">+</span></h2>
+            <ul data-esp="Encender el PC de la sala.|PC se ve en la entrada HDMI1 de la TV.|El mando de la barra puede...|Silenciar micro / Activar micro|Subir o bajar volumen"
+                data-cat="Encendre el PC de la sala.|El PC es veu a l'entrada HDMI1 de la TV.|El comandament de la barra pot...|Silenciar micròfon / Activar micròfon|Pujar o baixar el volum">
+                <li>Encender el PC de la sala.</li>
+                <li>PC se ve en la entrada HDMI1 de la TV.</li>
+                <li>El mando de la barra puede...</li>
+                <li>Silenciar micro / Activar micro</li>
+                <li>Subir o bajar volumen</li>
+            </ul>
+        </section>
+
+        <section id="conectar-portatil">
+            <h2 data-esp="Conexión con portátil" data-cat="Connexió amb portàtil">Conexión con portátil <span class="toggle-symbol">+</span></h2>
+            <ul data-esp="Buscar el conector HDMI en la roseta debajo la TV.|Conectar el cable HDMI de la roseta al portátil.|Portátil se ve en la entrada HDMI2 de la TV."
+                data-cat="Buscar el connector HDMI a la roseta sota la TV.|Connectar el cable HDMI de la roseta al portàtil.|El portàtil es veu a l'entrada HDMI2 de la TV.">
+                <li>Buscar el conector HDMI en la roseta debajo la TV.</li>
+                <li>Conectar el cable HDMI de la roseta al portátil.</li>
+                <li>Portátil se ve en la entrada HDMI2 de la TV.</li>
+            </ul>
+        </section>
+
+        <section id="compartir-pantalla">
+            <h2 data-esp="Ver portátil en la TV" data-cat="Veure portàtil a la TV">Ver portátil en la TV <span class="toggle-symbol">+</span></h2>
+            <ul data-esp="Conectar el portátil pulsar 'Windows + P'.|Aparece un menú a la derecha. Seleccionar 'Duplicado'."
+                data-cat="Connectar el portàtil, prémer 'Windows + P'.|Apareix un menú a la dreta. Seleccionar 'Duplicat'.">
+                <li>Una vez conectado el portátil pulsar "Windows + P".</li>
+                <li>Aparece un menú a la derecha. Seleccionar "Duplicado".</li>
+            </ul>
+        </section>
+
+        <section id="conexion-zoom">
+            <h2 data-esp="Conexión a Zoom" data-cat="Connexió a Zoom">Conexión a Zoom <span class="toggle-symbol">+</span></h2>
+            <ul data-esp="Hacer click al enlace que ha recibido.|Pulsar en 'Abrir Zoom Meeting'.|Pulsar en 'Unirse con el audio compartido'.|En caso de problemas verificar lo siguiente:|Microfono: Teléfono con altavoz con cancelación eco|Altavoz: Teléfono con altavoz con cancelación eco|Vídeo: Bose Videobar VB1.|Se recomienda silenciar micro.|Para compartir pantalla:|Pulsar botón verde 'Compartir pantalla'|Pulsar en 'Pantalla' y luego en botón 'Compartir'"
+                data-cat="Fer clic a l'enllaç que ha rebut.|Prémer 'Obrir Zoom Meeting'.|Prémer 'Unir-se amb l'àudio compartit'.|En cas de problemes verificar el següent:|Micròfon: Telèfon amb altaveu amb cancel·lació d'eco|Altaveu: Telèfon amb altaveu amb cancel·lació d'eco|Vídeo: Bose Videobar VB1.|Es recomana silenciar el micròfon.|Per compartir pantalla:|Prémer el botó verd 'Compartir pantalla'|Prémer 'Pantalla' i després el botó 'Compartir'">
+                <li>Hacer click al enlace que ha recibido.</li>
+                <li>Pulsar en "Abrir Zoom Meeting".</li>
+                <li>Pulsar en "Unirse con el audio compartido".</li>
+                <li>En caso de problemas verificar lo siguiente:</li>
+                <li>Microfono: Teléfono con altavoz con cancelación eco</li>
+                <li>Altavoz: Teléfono con altavoz con cancelación eco</li>
+                <li>Vídeo: Bose Videobar VB1.</li>
+                <li>Se recomienda silenciar micro.</li>
+                <li>Para compartir pantalla:</li>
+                <li>Pulsar botón verde "Compartir pantalla"</li>
+                <li>Pulsar en "Pantalla" y luego en botón "Compartir"</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <h3 data-esp="Cualquier duda llamar al 1010." data-cat="Qualsevol dubte truqui al 1010.">Cualquier duda llamar al 1010.</h3>
+        <h5 data-esp="Serveis Tècnics - SJD" data-cat="Serveis Tècnics - SJD">Serveis Tècnics - SJD</h5>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageSwitcher = document.querySelector('.language-switcher');
+            const sections = document.querySelectorAll('section');
+
+            function updateLanguage(language) {
+                document.querySelectorAll('[data-' + language + ']').forEach(element => {
+                    if (element.tagName === 'H2' || element.tagName === 'H5') {
+                        element.textContent = element.getAttribute('data-' + language);
+                        if (element.tagName === 'H2') {
+                            element.innerHTML += ' <span class="toggle-symbol">+</span>';
+                        }
+                    } else {
+                        const content = element.getAttribute('data-' + language).split('|');
+                        element.innerHTML = content.map(item => `<li>${item}</li>`).join('');
+                    }
+                });
+            }
+
+            languageSwitcher.addEventListener('click', (e) => {
+                if (e.target.tagName === 'SPAN') {
+                    document.querySelectorAll('.language-switcher span').forEach(span => span.classList.remove('active'));
+                    e.target.classList.add('active');
+                    updateLanguage(e.target.id);
+                }
+            });
+
+            sections.forEach(section => {
+                const header = section.querySelector('h2');
+                const symbol = header.querySelector('.toggle-symbol');
+                header.addEventListener('click', () => {
+                    section.classList.toggle('expanded');
+                    if (section.classList.contains('expanded')) {
+                        symbol.textContent = '-';
+                    } else {
+                        symbol.textContent = '+';
+                    }
+                });
+            });
+
+            updateLanguage('esp'); // Set default language to Spanish
+        });
+    </script>
+</body>
+</html>
