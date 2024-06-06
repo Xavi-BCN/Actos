@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+        body {
+            background-color: #f0f2f5;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            border: 1px solid #eeeeee;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h4 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #003b5b;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        #submit {
+            border: none;
+            background-color: orangered;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #submit:hover {
+            background-color: #333333;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+        }
+        @media (min-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="" name="actos-form">
+            <h4>Acto</h4>
+            <input type="text" name="num-OT" placeholder="Número de OT" required>
+            <input type="date" name="fecha" required>
+            <div class="radio-group">
+                <label><input type="radio" name="auditorio" value="PLAZA" required> PLAZA</label>
+                <label><input type="radio" name="auditorio" value="PCCB" required> PCCB</label>
+                <label><input type="radio" name="auditorio" value="OTRO" required> OTROS</label>
+            </div>
+            <div>
+                <label for="tec">Técnico:</label>
+                <select id="tec" name="tecnico" required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="TONI">TONI</option>
+                    <option value="EXTERNO1">EXTERNO1</option>
+                    <option value="EXTERNO2">EXTERNO2</option>
+                </select>
+            </div>
+            <div>
+                <label for="startHour">INICIO ACTO:</label>
+                <input type="time" id="startHour" name="hora_inicio" required>
+            </div>
+            <div>
+                <label for="endHour">FIN ACTO:</label>
+                <input type="time" id="endHour" name="hora_final" required>
+            </div>
+            <div>
+                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Tiempo Acto" readonly>
+            </div>
+            <div>
+                <label for="extraTime">Tiempo Técnico Extra:</label>
+                <select id="extraTime" name="tiempo_extra" required>
+                    <option value="00:00">00:00</option>
+                    <option value="00:30">00:30</option>
+                    <option value="00:45">00:45</option>
+                    <option value="01:00">01:00</option>
+                    <option value="01:30">01:30</option>
+                    <option value="01:45">01:45</option>
+                    <option value="02:00">02:00</option>
+                    <option value="02:30">02:30</option>
+                    <option value="03:00">03:00</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Tiempo Acto con técnico" readonly>
+            </div>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="aula"> Aula</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="incidencia" value="Normal" required> Normal</label>
+                    <label><input type="radio" name="incidencia" value="Cancelado" required> Cancelado</label>
+                    <label><input type="radio" name="incidencia" value="No se han presentado" required> No presentado</label>
+                </div>
+            </div>
+            
+            <input type="submit" value="Enviar" id="submit">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('endHour').addEventListener('change', calculateTimes);
+        document.getElementById('extraTime').addEventListener('change', calculateTimes);
+        document.getElementById('startHour').addEventListener('change', validateTimes);
+        document.getElementById('endHour').addEventListener('change', validateTimes);
+
+        function validateTimes() {
+            const start = document.getElementById('startHour').value;
+            const end = document.getElementById('endHour').value;
+
+            if (start && end) {
+                if (start >= end) {
+                    alert("La hora de fin no puede ser inferior o igual a la hora de inicio.");
+                    document.getElementById('endHour').value = '';
+                }
+            }
+        }
+
+        function calculateTimes() {
+            const start = document.getElementById('startHour').value;
+            const end = document.getElementById('endHour').value;
+            const extra = document.getElementById('extraTime').value;
+
+            if (start && end && start < end) {
+                const startTime = new Date(`1970-01-01T${start}Z`);
+                const endTime = new Date(`1970-01-01T${end}Z`);
+                const diffMs = endTime - startTime;
+                const diffHrs = Math.floor(diffMs / 3600000);
+                const diffMins = Math.floor((diffMs % 3600000) / 60000);
+                const tiempoActo = `${diffHrs.toString().padStart(2, '0')}:${diffMins.toString().padStart(2, '0')}`;
+                document.getElementById('tiempoActo').value = tiempoActo;
+
+                const [extraHrs, extraMins] = extra.split(':').map(Number);
+                const totalMins = diffMins + extraMins;
+                const totalHrs = diffHrs + extraHrs + Math.floor(totalMins / 60);
+                const finalMins = totalMins % 60;
+                const tiempoActoConTecnico = `${totalHrs.toString().padStart(2, '0')}:${finalMins.toString().padStart(2, '0')}`;
+                document.getElementById('tiempoActoConTecnico').value = tiempoActoConTecnico;
+            }
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwxPk8hGNGGTTmH2uNI_ck6ZlHMK74MMdKKivrP34jH0YRRrYfpzj51B-40Qsxu80br/exec'
+        const form = document.forms['actos-form']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    alert("Los datos han sido enviados correctamente.");
+                    form.reset();
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
