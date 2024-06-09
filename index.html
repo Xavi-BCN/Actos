@@ -141,45 +141,46 @@
 </head>
 <body>
     <header>
-        <h1>Reporte técnico de Actos</h1>
+        <h1>Informe tècnic d'actes - Serveis Tècnics</h1>
+        
     </header>
     <div class="container">
         <form method="post" action="" name="actos-form">
-            <input type="text" name="num-OT" placeholder="Número de OT" pattern="\d{7}" title="Debe tener 7 dígitos" required maxlength="7" inputmode="numeric" autocomplete="off">
+            <input type="text" name="num-OT" placeholder="Número d'OT" pattern="\d{7}" title="Debe tener 7 dígitos" required maxlength="7" inputmode="numeric" autocomplete="off">
             <input type="date" name="fecha" max="" required>
             <div class="radio-group">
                 <label><input type="radio" name="auditorio" value="PLAZA" required> PLAZA</label>
                 <label><input type="radio" name="auditorio" value="PCCB" required> PCCB</label>
-                <label><input type="radio" name="auditorio" value="OTRO" required> OTROS</label>
+                <label><input type="radio" name="auditorio" value="OTRO" required> ALTRES</label>
             </div>
             <div class="linea"></div>
             
             <div>
-                <label for="startHour">INICIO ACTO:</label>
+                <label for="startHour">INICI ACTE:</label>
                 <input type="time" id="startHour" name="hora_inicio" required>
             </div>
             <div>
-                <label for="endHour">FIN ACTO:</label>
+                <label for="endHour">FI ACTE:</label>
                 <input type="time" id="endHour" name="hora_final" required>
             </div>
             <div>
-                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Cálculo de la duración del acto" readonly tabindex="-1">
+                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Càlcul de la durada de l'acte" readonly tabindex="-1">
             </div>
             <div class="linea"></div>
             <div>
-                <label for="tec">TECNICO:</label>
+                <label for="tec">TÈCNIC:</label>
                 <select id="tec" name="tecnico" required>
                     <option value="" disabled selected>Seleccionar</option>
                     <option value="TONI">TONI</option>
                     <option value="TONI">NESTOR</option>
-                    <option value="EXTERNO1">EXTERNO1</option>
-                    <option value="EXTERNO2">EXTERNO2</option>
-                    <option value="EXTERNO2">EXTERNO3</option>
-                    <option value="EXTERNO2">EXTERNO4</option>
+                    <option value="EXTERNO1">EXTERN 1</option>
+                    <option value="EXTERNO2">EXTERN 2</option>
+                    <option value="EXTERNO2">EXTERN 3</option>
+                    <option value="EXTERNO2">EXTERN 4</option>
                 </select>
             </div>
             <div>
-                <label for="extraTime">TIEMPO ACTO CON TECNICO:</label>
+                <label for="extraTime">TEMPS D'ACTE AMB TÈCNIC:</label>
                 <select id="extraTime" name="tiempo_extra" required>
                     <option value="00:00">00:00</option>
                     <option value="00:30">00:30</option>
@@ -193,16 +194,16 @@
                 </select>
             </div>
             <div>
-                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Cálculo horas con técnico" readonly tabindex="-1">
+                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Càlcul hores amb tècnic" readonly tabindex="-1">
             </div>
             
             <div class="checkbox-group">
                 <label><input type="checkbox" name="aula"> Aula</label>
-                <label><input type="checkbox" name="cancelado"> Cancelado</label>
-                <label><input type="checkbox" name="nulo"> Nulo</label>
+                <label><input type="checkbox" name="cancelado"> Cancel·lat</label>
+                <label><input type="checkbox" name="nulo"> No es presenten</label>
             </div>
             <input type="submit" value="Enviar" id="submit">
-            <div id="loading-message">Un momento, enviando información...</div>
+            <div id="loading-message">Un moment, enviant informació...</div>
         </form>
     </div>
 
@@ -219,7 +220,7 @@
 
             if (start && end) {
                 if (start >= end) {
-                    alert("La hora de fin no puede ser inferior o igual a la hora de inicio.");
+                    alert("L'hora de fi no pot ser inferior o igual a l'hora d'inici.");
                     document.getElementById('endHour').value = '';
                 }
             }
@@ -260,7 +261,7 @@
             document.getElementById('loading-message').style.display = 'block'; // Mostrar mensaje de espera
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                 .then(response => {
-                    alert("Los datos han sido enviados correctamente.");
+                    alert("Les dades han estat enviades correctament.");
                     form.reset();
                     document.getElementById('loading-message').style.display = 'none'; // Ocultar mensaje de espera
                 })
