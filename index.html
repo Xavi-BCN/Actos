@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
             box-sizing: border-box;
@@ -13,18 +15,19 @@
             background-color: #f7f7f7;
             padding: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
         }
         .container {
             width: 100%;
-            max-width: 500px;
             padding: 20px;
             border: 1px solid #eeeeee;
             border-radius: 10px;
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px; /* Añadir margen superior para separar del header */
         }
         h4 {
             margin-bottom: 10px;
@@ -60,18 +63,55 @@
             display: flex;
             align-items: center;
         }
-         @media (min-width: 768px) {
-            main {
-                max-width: 800px;
-                margin: 0 auto;
+        /* Estilos de cabecera */
+        header {
+            background-color: #d32f2f; /* Rojo */
+            color: #fff;
+            padding: 1rem 2rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            header {
+                padding: 0.5rem 1rem;
+            }
+            header h1 {
+                font-size: 1.2rem;
+            }
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+                margin-top: 70px; /* Ajustar margen superior para pantallas pequeñas */
+            }
+            input, select, textarea {
+                padding: 8px;
+                font-size: 16px;
+            }
+            #submit {
+                padding: 8px;
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Reporte técnico de Actos</h1>
+    </header>
     <div class="container">
         <form method="post" action="" name="actos-form">
-            <h4>Reporte técnico de Actos</h4>
             <input type="text" name="num-OT" placeholder="Número de OT" pattern="\d{7}" title="Debe tener 7 dígitos" required>
             <input type="date" name="fecha" max="" required>
             <div class="radio-group">
@@ -168,7 +208,7 @@
 
         // Limitar la fecha al día actual
         const today = new Date().toISOString().split('T')[0];
-        document.querySelector("input[name='fecha']");
+        document.querySelector("input[name='fecha']").setAttribute('max', today);
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwxPk8hGNGGTTmH2uNI_ck6ZlHMK74MMdKKivrP34jH0YRRrYfpzj51B-40Qsxu80br/exec';
         const form = document.forms['actos-form'];
