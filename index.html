@@ -63,6 +63,9 @@
             display: flex;
             align-items: center;
         }
+        .checkbox-group label input {
+            margin-right: 10px; /* Separar el texto de la casilla */
+        }
         /* Estilos de cabecera */
         header {
             background-color: #d32f2f; /* Rojo */
@@ -80,6 +83,11 @@
         header h1 {
             font-size: 1.5rem;
             text-align: center;
+        }
+        #loading-message {
+            display: none;
+            color: #007bff;
+            margin-top: 10px;
         }
         @media (max-width: 600px) {
             header {
@@ -162,6 +170,7 @@
                 <label><input type="checkbox" name="nulo"> Nulo</label>
             </div>
             <input type="submit" value="Enviar" id="submit">
+            <div id="loading-message">Un momento, enviando información...</div>
         </form>
     </div>
 
@@ -215,12 +224,17 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            document.getElementById('loading-message').style.display = 'block'; // Mostrar mensaje de espera
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                 .then(response => {
                     alert("Los datos han sido enviados correctamente.");
                     form.reset();
+                    document.getElementById('loading-message').style.display = 'none'; // Ocultar mensaje de espera
                 })
-                .catch(error => console.error('Error!', error.message));
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    document.getElementById('loading-message').style.display = 'none'; // Ocultar mensaje de espera
+                });
         });
     </script>
 </body>
