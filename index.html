@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@latest/dist/sweetalert2.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +13,7 @@
             font-size: 18px;
         }
         body {
-            background-color: #f7f7f7;
+            background-color: #938989;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -29,6 +30,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 80px; /* Añadir margen superior para separar del header */
         }
+        .linea {
+            width: 100%;
+            height: 2px;
+            background-color: #f36d0e;
+            margin: 20px 0;
+        }
         h4 {
             margin-bottom: 10px;
             font-size: 24px;
@@ -38,9 +45,27 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid #cccccc;
+            border: 1px solid #14e9ec;
             border-radius: 5px;
+            text-align: center;
         }
+        input[name="num-OT"] {
+            font-size: 20px; /* Tamaño de fuente en píxeles */
+            font-weight: 700;
+        }
+        input[name="tiempo_acto"] {
+            font-size: 20px; /* Tamaño de fuente en píxeles */
+            font-weight: 700;
+            color: #000000;
+            background-color: #f5cd02;
+        }
+        input[name="tiempo_acto_con_tecnico"] {
+            font-size: 20px; /* Tamaño de fuente en píxeles */
+            font-weight: 700;
+            color: #000000;
+            background-color: #f5cd02;
+        }
+    
         #submit {
             border: none;
             background-color: #ff4500;
@@ -52,7 +77,7 @@
             cursor: pointer;
         }
         #submit:hover {
-            background-color: #333333;
+            background-color: #0c6be8;
         }
         .radio-group, .checkbox-group {
             display: flex;
@@ -120,22 +145,15 @@
     </header>
     <div class="container">
         <form method="post" action="" name="actos-form">
-            <input type="text" name="num-OT" placeholder="Número de OT" pattern="\d{7}" title="Debe tener 7 dígitos" required>
+            <input type="text" name="num-OT" placeholder="Número de OT" pattern="\d{7}" title="Debe tener 7 dígitos" required maxlength="7">
             <input type="date" name="fecha" max="" required>
             <div class="radio-group">
                 <label><input type="radio" name="auditorio" value="PLAZA" required> PLAZA</label>
                 <label><input type="radio" name="auditorio" value="PCCB" required> PCCB</label>
                 <label><input type="radio" name="auditorio" value="OTRO" required> OTROS</label>
             </div>
-            <div>
-                <label for="tec">Técnico:</label>
-                <select id="tec" name="tecnico" required>
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option value="TONI">TONI</option>
-                    <option value="EXTERNO1">EXTERNO1</option>
-                    <option value="EXTERNO2">EXTERNO2</option>
-                </select>
-            </div>
+            <div class="linea"></div>
+            
             <div>
                 <label for="startHour">INICIO ACTO:</label>
                 <input type="time" id="startHour" name="hora_inicio" required>
@@ -145,10 +163,23 @@
                 <input type="time" id="endHour" name="hora_final" required>
             </div>
             <div>
-                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Duración Acto" readonly>
+                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Cálculo de la duración del acto" readonly>
+            </div>
+            <div class="linea"></div>
+            <div>
+                <label for="tec">TECNICO:</label>
+                <select id="tec" name="tecnico" required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="TONI">TONI</option>
+                    <option value="TONI">NESTOR</option>
+                    <option value="EXTERNO1">EXTERNO1</option>
+                    <option value="EXTERNO2">EXTERNO2</option>
+                    <option value="EXTERNO2">EXTERNO3</option>
+                    <option value="EXTERNO2">EXTERNO4</option>
+                </select>
             </div>
             <div>
-                <label for="extraTime">Tiempo Técnico:</label>
+                <label for="extraTime">TIEMPO ACTO CON TECNICO:</label>
                 <select id="extraTime" name="tiempo_extra" required>
                     <option value="00:00">00:00</option>
                     <option value="00:30">00:30</option>
@@ -162,8 +193,9 @@
                 </select>
             </div>
             <div>
-                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Horas técnico" readonly>
+                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Cálculo horas con técnico" readonly>
             </div>
+            <div class="linea"></div>
             <div class="checkbox-group">
                 <label><input type="checkbox" name="aula"> Aula</label>
                 <label><input type="checkbox" name="cancelado"> Cancelado</label>
