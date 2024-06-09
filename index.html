@@ -28,7 +28,7 @@
             border-radius: 10px;
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /*margin-top: 20px;  Añadir margen superior para separar del header */
+            margin-top: 20px; /* Añadir margen superior para separar del header */
         }
         .linea {
             width: 100%;
@@ -163,9 +163,9 @@
                 <input type="time" id="endHour" name="hora_final" required>
             </div>
             <div>
-                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Cálculo de la duración del acto" readonly>
+                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Cálculo de la duración del acto" readonly tabindex="-1">
             </div>
-          
+            <div class="linea"></div>
             <div>
                 <label for="tec">TECNICO:</label>
                 <select id="tec" name="tecnico" required>
@@ -193,8 +193,9 @@
                 </select>
             </div>
             <div>
-                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Cálculo horas con técnico" readonly>
+                <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Cálculo horas con técnico" readonly tabindex="-1">
             </div>
+            
             <div class="checkbox-group">
                 <label><input type="checkbox" name="aula"> Aula</label>
                 <label><input type="checkbox" name="cancelado"> Cancelado</label>
@@ -206,6 +207,7 @@
     </div>
 
     <script>
+
         document.getElementById('endHour').addEventListener('change', calculateTimes);
         document.getElementById('extraTime').addEventListener('change', calculateTimes);
         document.getElementById('startHour').addEventListener('change', validateTimes);
