@@ -14,7 +14,7 @@
         }
         body {
             background-color: #938989;
-            padding: 5px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,12 +23,12 @@
         }
         .container {
             width: 100%;
-            padding: 5px;
+            padding: 20px;
             border: 1px solid #eeeeee;
             border-radius: 10px;
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            
+            margin-top: 20px; /* Añadir margen superior para separar del header */
         }
         .linea {
             width: 100%;
@@ -126,7 +126,7 @@
             }
             .container {
                 padding: 10px;
-                margin-top: 70px; /* Ajustar margen superior para pantallas pequeñas */
+                margin-top: 30px; /* Ajustar margen superior para pantallas pequeñas */
             }
             input, select, textarea {
                 padding: 8px;
@@ -183,7 +183,7 @@
                     <option value="Toni">Toni</option>
                     <option value="Nestor">Nestor</option>
                     <option value="Iker">Iker</option>
-                    <option value="BRYAN">Bryan</option>
+                    <option value="Bryan">Bryan</option>
                     <option value="Antony">Antony</option>
                     <option value="Sense tècnic">Sense tècnic</option>
                 </select>
@@ -212,9 +212,9 @@
             </div>
             
             <div class="checkbox-group">
-                <label><input type="checkbox" name="aula"> Aula</label>
-                <label><input type="checkbox" name="cancelado"> Cancel·lat</label>
-                <label><input type="checkbox" name="nulo"> No es presenten</label>
+                <label><input type="checkbox" name="aula" value="Si"> Aula</label>
+                <label><input type="checkbox" name="cancelado" value="Cancel·lat"> Cancel·lat</label>
+                <label><input type="checkbox" name="nulo" value="No es presenten"> No es presenten</label>
             </div>
             <input type="submit" value="Enviar" id="submit">
             <div id="loading-message">Un moment, enviant informació...</div>
