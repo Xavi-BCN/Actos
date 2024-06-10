@@ -141,45 +141,56 @@
 </head>
 <body>
     <header>
-        <h1>Informe tècnic d'actes - Audiovisuals</h1>
+        <h1>Informe tècnic d'actes - Serveis Tècnics</h1>
         
     </header>
     <div class="container">
         <form method="post" action="" name="actos-form">
             <input type="text" name="num-OT" placeholder="Número d'OT" pattern="\d{7}" title="Debe tener 7 dígitos" required maxlength="7" inputmode="numeric" autocomplete="off">
+            <input type="text" name="nom_jornada" placeholder="Escriu el nom de l'acte" required autocomplete="off"> 
+           
             <input type="date" name="fecha" max="" required>
-            <div class="radio-group">
-                <label><input type="radio" name="auditorio" value="PLAZA" required> PLAZA</label>
-                <label><input type="radio" name="auditorio" value="PCCB" required> PCCB</label>
-                <label><input type="radio" name="auditorio" value="OTRO" required> ALTRES</label>
-            </div>
-             <input type="text" name="nom_jornada" placeholder="Escriu el nom de l'acte" required autocomplete="off">            
+            
             <div>
-                <label for="startHour">INICI ACTE:</label>
-                <input type="time" id="startHour" name="hora_inicio" required>
-            </div>
-            <div>
-                <label for="endHour">FI ACTE:</label>
-                <input type="time" id="endHour" name="hora_final" required>
-            </div>
-            <div>
-                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Càlcul de la durada de l'acte" readonly tabindex="-1">
-            </div>
-            <div class="linea"></div>
-            <div>
-                <label for="tec">TÈCNIC:</label>
-                <select id="tec" name="tecnico" required>
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option value="TONI">TONI</option>
-                    <option value="NESTOR">NESTOR</option>
-                    <option value="IKER">IKER</option>
-                    <option value="BRYAN">BRYAN</option>
-                    <option value="ANTONY">ANTONY</option>
+                <select id="mod" name="auditorio" required>
+                    <option value="" disabled selected>Triar sala o auditori</option>
+                    <option value="PLAZA">Plaza</option>
+                    <option value="PCCB">PCCB</option>
+                    <option value="Hipòcrates">Hipòcrates</option>
+                    <option value="Pasteur">Pasteur</option>
+                    <option value="Otra">Altres</option>
                 </select>
             </div>
             <div>
-                <label for="extraTime">TEMPS D'ACTE AMB TÈCNIC:</label>
+                <select id="mod" name="modelitat" required>
+                    <option value="" disabled selected>Triar modelitat</option>
+                    <option value="Presencial i Zoom">Presencial i Zoom</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Zoom">Zoom</option>
+                </select>
+            </div>
+            <div>
+                <label for="startHour">Hora inici:</label>
+                <input type="time" id="startHour" name="hora_inicio" required>
+            </div>
+            <div>
+                <label for="endHour">Hora final:</label>
+                <input type="time" id="endHour" name="hora_final" required>
+            </div>
+            <div>
+                <select id="tec" name="tecnico" required>
+                    <option value="" disabled selected>Seleccionar tècnic</option>
+                    <option value="Toni">Toni</option>
+                    <option value="Nestor">Nestor</option>
+                    <option value="Iker">Iker</option>
+                    <option value="BRYAN">Bryan</option>
+                    <option value="Antony">Antony</option>
+                    <option value="Sense tècnic">Sense tècnic</option>
+                </select>
+            </div>
+            <div>
                 <select id="extraTime" name="tiempo_extra" required>
+                    <option value="" disabled selected>Temps tècnic pre/post acte</option>
                     <option value="00:00">00:00</option>
                     <option value="00:30">00:30</option>
                     <option value="00:45">00:45</option>
@@ -191,6 +202,11 @@
                     <option value="03:00">03:00</option>
                 </select>
             </div>
+            <div>
+                <input type="text" id="tiempoActo" name="tiempo_acto" placeholder="Càlcul de la durada de l'acte" readonly tabindex="-1">
+            </div>
+           
+           
             <div>
                 <input type="text" id="tiempoActoConTecnico" name="tiempo_acto_con_tecnico" placeholder="Càlcul hores amb tècnic" readonly tabindex="-1">
             </div>
